@@ -1,0 +1,657 @@
+<!doctype html><html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><script src="https://telegram.org/js/telegram-web-app.js"></script><style>body{margin:0}</style>
+<title>30 Kunlik Kundalik</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@500;700&family=Special+Elite&display=swap">
+<style>
+/* Layout: a desk with a book on it. Cover (with settings), stats strip, 30 day circles, then two book pages per day: morning page and evening review. */
+:root {
+  --desk: #E4E7EC;
+  --paper: #FCFCFD;
+  --ink: #1B2742;
+  --muted: #5E667A;
+  --rule: #CBD5E8;
+  --margin: #E98C98;
+  --edge: #D3D8E0;
+  --accent: #A51C30;
+  --accent-bg: #A51C30;
+  --on-accent: #FFFFFF;
+  --shadow: rgba(20, 30, 60, .35);
+
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-write: "Caveat", "Segoe Print", cursive;
+  --font-head: "Caveat", "Segoe Print", cursive;
+  --scale: 1.3;
+  --head-size: 32px;
+  --fs: 17;
+  --lines: linear-gradient(to bottom, transparent 31px, var(--rule) 31px);
+  --bgsize: 100% 32px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --desk: #0D0F14; --paper: #181B24; --ink: #E7EAF3; --muted: #9AA3B6; --rule: #2B3246;
+    --margin: #7B3441; --edge: #262B38; --accent: #EE6D80; --accent-bg: #C93A50; --on-accent: #FFFFFF;
+    --shadow: rgba(0, 0, 0, .6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --desk: #0D0F14; --paper: #181B24; --ink: #E7EAF3; --muted: #9AA3B6; --rule: #2B3246;
+  --margin: #7B3441; --edge: #262B38; --accent: #EE6D80; --accent-bg: #C93A50; --on-accent: #FFFFFF;
+  --shadow: rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
+:root[data-skin="rose"] {
+  --desk: #EBD3D9; --paper: #FFF9FA; --ink: #44202C; --muted: #6E4A55; --rule: #F1CBD3;
+  --margin: #E5A0B0; --edge: #E3C3CB; --accent: #B33055; --accent-bg: #B33055; --on-accent: #FFFFFF;
+  --shadow: rgba(90, 30, 50, .35);
+  color-scheme: light;
+}
+:root[data-skin="forest"] {
+  --desk: #D3DCD2; --paper: #F8FBF7; --ink: #1D3727; --muted: #43594A; --rule: #C8D9C5;
+  --margin: #A8C0A3; --edge: #BFCBBD; --accent: #2E6B49; --accent-bg: #2E6B49; --on-accent: #FFFFFF;
+  --shadow: rgba(20, 50, 30, .35);
+  color-scheme: light;
+}
+:root[data-skin="sea"] {
+  --desk: #CDDCE5; --paper: #F7FBFD; --ink: #12324A; --muted: #3F566A; --rule: #BDD4E1;
+  --margin: #8DBAD2; --edge: #B7CAD6; --accent: #1E6C93; --accent-bg: #1E6C93; --on-accent: #FFFFFF;
+  --shadow: rgba(15, 50, 80, .35);
+  color-scheme: light;
+}
+:root[data-skin="night"] {
+  --desk: #0D0F14; --paper: #181B24; --ink: #E7EAF3; --muted: #9AA3B6; --rule: #2B3246;
+  --margin: #7B3441; --edge: #262B38; --accent: #EE6D80; --accent-bg: #C93A50; --on-accent: #FFFFFF;
+  --shadow: rgba(0, 0, 0, .6);
+  color-scheme: dark;
+}
+:root[data-font="classic"] { --font-write: "Lora", Georgia, serif; --font-head: "Lora", Georgia, serif; --scale: 1; --head-size: 24px; }
+:root[data-font="type"] { --font-write: "Special Elite", "Courier New", monospace; --font-head: "Special Elite", "Courier New", monospace; --scale: .9; --head-size: 22px; }
+:root[data-font="modern"] { --font-write: "Inter", system-ui, sans-serif; --font-head: "Space Grotesk", system-ui, sans-serif; --scale: .95; --head-size: 24px; }
+:root[data-paper="grid"] {
+  --lines: linear-gradient(to bottom, transparent 31px, var(--rule) 31px), linear-gradient(to right, transparent 31px, var(--rule) 31px);
+  --bgsize: 32px 32px;
+}
+:root[data-paper="dots"] {
+  --lines: radial-gradient(circle at 1px 31px, var(--rule) 1.4px, transparent 1.9px);
+  --bgsize: 32px 32px;
+}
+:root[data-paper="plain"] { --lines: none; --bgsize: auto; }
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--desk); color: var(--ink);
+  font-family: var(--font-ui); font-size: 15px; line-height: 1.5;
+  padding-block: 20px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+main { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; }
+h1, h2 { margin: 0; text-wrap: balance; }
+.eyebrow { font-size: 12px; letter-spacing: .09em; text-transform: uppercase; font-weight: 600; }
+button { font-family: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Cover */
+.cover {
+  position: relative; background: var(--accent-bg); color: var(--on-accent);
+  border-radius: 6px 16px 16px 6px; padding: 18px 46px 22px 28px;
+  box-shadow: 0 12px 26px -14px var(--shadow); overflow: hidden;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.cover::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 10px; background: rgba(0, 0, 0, .22); }
+.cover::after { content: ""; position: absolute; top: 0; bottom: 0; right: 16px; width: 9px; background: rgba(0, 0, 0, .28); }
+.cover-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; position: relative; z-index: 1; }
+.cover h1 { font-family: "Caveat", "Segoe Print", cursive; font-weight: 700; font-size: 48px; line-height: .95; }
+.cover p { margin: 0; font-size: 14px; max-width: 46ch; opacity: .92; }
+.cover .today { font-size: 13px; opacity: .92; }
+.icon-btn {
+  width: 38px; height: 38px; border-radius: 50%; cursor: pointer; display: grid; place-items: center;
+  background: rgba(255, 255, 255, .16); border: 1px solid rgba(255, 255, 255, .4); color: inherit;
+}
+.icon-btn[aria-expanded="true"] { background: rgba(255, 255, 255, .34); }
+
+/* Settings */
+.panel { background: var(--paper); border: 1px solid var(--edge); border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 18px; }
+.group { display: flex; flex-direction: column; gap: 8px; }
+.group > .lbl { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.opts { display: flex; flex-wrap: wrap; gap: 8px; }
+.opt { font-size: 14px; padding: 8px 14px; border-radius: 999px; cursor: pointer; border: 1px solid var(--edge); background: transparent; color: var(--ink); }
+.opt[aria-pressed="true"] { background: var(--accent-bg); border-color: var(--accent-bg); color: var(--on-accent); }
+.opt[data-font="hand"] { font-family: "Caveat", cursive; font-size: 19px; line-height: 1.1; }
+.opt[data-font="classic"] { font-family: "Lora", Georgia, serif; }
+.opt[data-font="type"] { font-family: "Special Elite", "Courier New", monospace; font-size: 13px; }
+.opt[data-font="modern"] { font-family: "Inter", sans-serif; }
+.swatches { display: flex; flex-wrap: wrap; gap: 12px; }
+.swatch { background: none; border: 0; padding: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--ink); font-size: 12px; }
+.swatch .dot { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--edge); display: block; }
+.swatch[aria-pressed="true"] .dot { outline: 2px solid var(--accent); outline-offset: 2px; }
+.swatch[aria-pressed="true"] { font-weight: 600; }
+.panel input[type="range"] { width: 100%; accent-color: var(--accent-bg); }
+.panel input[type="date"] { width: 100%; font: inherit; color: var(--ink); background: var(--desk); border: 1px solid var(--edge); border-radius: 8px; padding: 10px 12px; }
+.sample { font-family: var(--font-write); font-size: max(16px, calc(var(--fs) * var(--scale) * 1px)); line-height: 32px; margin: 0; padding: 0 2px; background-image: var(--lines); background-size: var(--bgsize); }
+
+/* Stats */
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--paper); border: 1px solid var(--edge); border-radius: 10px; }
+.stat { padding: 12px 14px; min-width: 0; }
+.stat + .stat { border-left: 1px solid var(--edge); }
+.stat b { display: block; font-family: "Space Grotesk", system-ui, sans-serif; font-size: 24px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.stat span { font-size: 12px; color: var(--muted); }
+
+/* Day circles */
+.days { display: flex; flex-direction: column; gap: 10px; }
+.grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.cell {
+  appearance: none; cursor: pointer; aspect-ratio: 1; min-width: 0; border-radius: 50%;
+  border: 1px solid var(--edge); background: var(--paper); color: var(--ink);
+  font-family: "Space Grotesk", system-ui, sans-serif; font-weight: 500; font-size: 15px; font-variant-numeric: tabular-nums;
+}
+.cell.done { background: var(--accent-bg); border-color: var(--accent-bg); color: var(--on-accent); }
+.cell.future { color: var(--muted); }
+.cell.today { outline: 2px dashed var(--accent); outline-offset: 2px; }
+.cell.sel { border: 2px solid var(--ink); }
+.weeks { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); }
+
+/* Book pages */
+#sheets { display: flex; flex-direction: column; gap: 22px; }
+.sheet {
+  position: relative; background: var(--paper); border: 1px solid var(--edge); border-radius: 4px; overflow: hidden;
+  box-shadow: 0 1px 0 var(--edge), 0 14px 28px -16px var(--shadow); color: var(--ink);
+}
+.band { display: flex; justify-content: space-between; gap: 10px; background: var(--ink); color: var(--paper); padding: 11px 18px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; }
+.pad { position: relative; padding: 22px 18px 24px; display: flex; flex-direction: column; gap: 22px; }
+:root[data-paper="lined"] .pad { padding-left: 46px; }
+:root[data-paper="lined"] .pad::before { content: ""; position: absolute; top: 0; bottom: 0; left: 34px; width: 1px; background: var(--margin); }
+.head { display: flex; align-items: flex-end; gap: 14px; }
+.num { font-family: "Space Grotesk", system-ui, sans-serif; font-weight: 700; font-size: 56px; line-height: .85; color: var(--accent); font-variant-numeric: tabular-nums; }
+.head > div { min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.head .eyebrow { color: var(--muted); font-size: 11px; }
+.head h2, .pad > h2 { font-family: var(--font-head); font-weight: 700; font-size: var(--head-size); line-height: 1.1; }
+.dateline { font-size: 13px; color: var(--muted); margin-top: -10px; }
+.idea { margin: 0; padding: 12px 14px; border-radius: 6px; font-size: 14px; background: color-mix(in srgb, var(--accent) 8%, var(--paper)); }
+.idea b { color: var(--accent); font-size: 11px; letter-spacing: .1em; margin-right: 8px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field > label, .field > .lbl { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; color: var(--muted); }
+.field > label.q { font-size: 15px; letter-spacing: 0; text-transform: none; color: var(--ink); }
+.hint { font-size: 13px; color: var(--muted); }
+.checks { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.check { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-size: 15px; }
+.check.on span { color: var(--muted); text-decoration: line-through; }
+.sheet input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none; flex: none; width: 24px; height: 24px; margin: 0; cursor: pointer;
+  border: 2px solid var(--ink); border-radius: 5px; background: transparent;
+}
+.sheet input[type="checkbox"]:checked {
+  background: var(--accent-bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E") center / 80% no-repeat;
+  border-color: var(--accent-bg);
+}
+.times { display: flex; gap: 12px; flex-wrap: wrap; }
+.times .field { flex: 1 1 120px; min-width: 0; }
+.times input { font: inherit; color: var(--ink); background: transparent; border: 1.5px solid var(--ink); border-radius: 8px; padding: 8px 10px; width: 100%; min-width: 0; }
+.tasks, .slots { display: flex; flex-direction: column; gap: 4px; margin-top: 4px; }
+.task, .slot { display: flex; align-items: center; gap: 12px; }
+.slot > span { flex: none; width: 46px; font-family: "Space Grotesk", system-ui, sans-serif; font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.li {
+  flex: 1; min-width: 0; height: 38px; border: 0; border-bottom: 1px solid var(--rule); background: transparent; color: var(--ink);
+  padding: 0 2px; font-family: var(--font-write); font-size: max(16px, calc(var(--fs) * var(--scale) * 1px)); border-radius: 0;
+}
+.li:focus { outline: none; border-bottom-color: var(--accent); }
+.task.on .li { text-decoration: line-through; color: var(--muted); }
+.write {
+  display: block; width: 100%; min-height: 64px; resize: none; overflow: hidden; border: 0; border-radius: 0;
+  padding: 0 2px; margin: 0; color: var(--ink);
+  font-family: var(--font-write); font-size: max(16px, calc(var(--fs) * var(--scale) * 1px)); line-height: 32px;
+  background-color: transparent; background-image: var(--lines); background-size: var(--bgsize); background-attachment: local;
+}
+.write:focus { outline: none; }
+.score { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.score button {
+  width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-weight: 600; font-size: 14px;
+  border: 1.5px solid var(--ink); background: transparent; color: var(--ink);
+}
+.score button[aria-pressed="true"] { background: var(--accent-bg); border-color: var(--accent-bg); color: var(--on-accent); }
+.stamp { align-self: flex-start; border: 2px solid var(--accent); color: var(--accent); border-radius: 6px; padding: 2px 9px; font-size: 11px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; transform: rotate(-6deg); }
+.row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.saved { font-size: 12px; color: var(--muted); min-height: 1em; }
+.btn { padding: 12px 18px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 15px; border: 1.5px solid var(--accent-bg); background: transparent; color: var(--accent); }
+.btn[aria-pressed="true"] { background: var(--accent-bg); color: var(--on-accent); }
+.motto { margin: 0; font-size: 13px; font-style: italic; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; }
+footer { font-size: 12px; color: var(--muted); max-width: 52ch; }
+@media (max-width: 380px) { .grid { grid-template-columns: repeat(5, 1fr); } .cover h1 { font-size: 42px; } .num { font-size: 46px; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<main>
+  <header class="cover">
+    <div class="cover-top">
+      <span class="eyebrow">Harvard metodi</span>
+      <button type="button" class="icon-btn" id="gear" aria-label="Sozlamalar" aria-expanded="false" aria-controls="settings">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+      </button>
+    </div>
+    <h1>30 kunlik<br>kundalik</h1>
+    <p>Har kun ikki sahifa: ertalab reja, kechqurun sarhisob. Yozganlaringiz faqat shu qurilmada saqlanadi.</p>
+    <div class="today" id="todayStamp"></div>
+  </header>
+
+  <section class="panel" id="settings" aria-label="Sozlamalar" hidden>
+    <div class="group">
+      <span class="lbl">Rang mavzusi</span>
+      <div class="swatches" id="skins"></div>
+    </div>
+    <div class="group">
+      <span class="lbl">Yozuv shrifti</span>
+      <div class="opts" id="fonts">
+        <button type="button" class="opt" data-font="hand">Qo'lyozma</button>
+        <button type="button" class="opt" data-font="classic">Klassik</button>
+        <button type="button" class="opt" data-font="type">Mashinka</button>
+        <button type="button" class="opt" data-font="modern">Zamonaviy</button>
+      </div>
+    </div>
+    <div class="group">
+      <span class="lbl">Qog'oz</span>
+      <div class="opts" id="papers">
+        <button type="button" class="opt" data-paper="lined">Chiziqli</button>
+        <button type="button" class="opt" data-paper="grid">Katakli</button>
+        <button type="button" class="opt" data-paper="dots">Nuqtali</button>
+        <button type="button" class="opt" data-paper="plain">Oddiy</button>
+      </div>
+    </div>
+    <div class="group">
+      <label class="lbl" for="fs">Yozuv o'lchami</label>
+      <input type="range" id="fs" min="15" max="21" step="1">
+      <p class="sample">Bugun o'zim uchun vaqt ajrataman.</p>
+    </div>
+    <div class="group">
+      <label class="lbl" for="startDate">Boshlash sanasi</label>
+      <input type="date" id="startDate">
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Natijalar">
+    <div class="stat"><b id="sDone">0/30</b><span>Yakunlangan kun</span></div>
+    <div class="stat"><b id="sStreak">0</b><span>Ketma-ket kun</span></div>
+    <div class="stat"><b id="sScore">–</b><span>O'rtacha baho</span></div>
+  </section>
+
+  <section class="days" aria-label="Kunlar">
+    <div class="grid" id="grid"></div>
+    <div class="weeks"><span>1-hafta: Vaqt</span><span>2: Ustuvorlik</span><span>3: Odat</span><span>4: Mustahkamlash</span></div>
+  </section>
+
+  <div id="sheets"></div>
+
+  <footer>Sahifa tuzilmasi «Harvard metodi» kundaligi shakliga o'xshatib qurilgan. Kunlik mavzu, g'oya va savollar shu ilova uchun yozilgan.</footer>
+</main>
+
+<script>
+(function () {
+  /* [sarlavha, g'oya, [3 ta vazifa], [2 ta kechki savol]] */
+  var PLAN = [
+    ["Nimani qadrlayman?", "Yo'lni bilmay tez yurish foyda bermaydi. Avval sizga nima muhimligini aniqlang, qolgan qarorlar shundan kelib chiqadi.",
+      ["Eng muhim 5 qadriyatimni yozdim", "Ulardan 3 tasini tanladim", "Har birini bir jumla bilan izohladim"],
+      ["Bugun qaysi qadriyatim bo'yicha yashadim?", "Qaysi qarorim qadriyatimga zid bo'ldi?"]],
+    ["Vaqtim qayerga ketyapti?", "O'lchanmagan narsani yaxshilab bo'lmaydi. Bugun har bir ishning qancha davom etganini yozib boring.",
+      ["Har bir ishni boshlangan va tugagan vaqti bilan yozdim", "Telefondagi kunlik ekran vaqtini yozib qo'ydim", "Kech tushganda jami vaqtni hisobladim"],
+      ["Eng ko'p vaqtim qaysi ishga ketdi?", "Qaysi vaqt bo'laklari behuda o'tdi va ularni qanday qaytaraman?"]],
+    ["Bugungi ish bugun", "Kechiktirilgan ish ertaga qarz bo'lib qaytadi. Ishlarni yozib, muhimligiga qarab saralang.",
+      ["Ertalab bugungi ishlar ro'yxatini tuzdim", "Har bir ishni «majburiy» yoki «ixtiyoriy» deb belgiladim", "Majburiy ishlarning hammasini bajardim"],
+      ["Qaysi ishni kechiktirmoqchi bo'ldim va nega?", "Ro'yxat tuzish menga nimani ko'rsatdi?"]],
+    ["Tong kunni boshqaradi", "Yaxshi boshlangan tong kunning ohangini belgilaydi. Buning uch tayanchi bor: yetarli uyqu, ertalabki harakat va yengil nonushta.",
+      ["Kamida 7 soat uxladim", "Ertalab 10 daqiqa harakat qildim", "Nonushtani me'yorida qildim"],
+      ["Tong kayfiyatim kunimga qanday ta'sir qildi?", "Ertaga tongni yaxshilash uchun nimani o'zgartiraman?"]],
+    ["Diqqatni himoya qilish", "Diqqat eng qimmat resursingiz. Uni chalg'ituvchilardan himoya qilgan kuningiz ishlar tezroq bitadi.",
+      ["Ish paytida bildirishnomalarni o'chirdim", "Bir marta 25 daqiqa to'xtovsiz ishladim", "Telefonni ko'zimdan uzoqqa qo'ydim"],
+      ["Bugun meni eng ko'p nima chalg'itdi?", "Chalg'ituvchini ertaga qanday kamaytiraman?"]],
+    ["Reja va haqiqat", "Reja kuch bermaydi, uni haqiqat bilan solishtirish kuch beradi. Farq qayerda paydo bo'lishini ko'ring.",
+      ["Kun rejasini soatlar bo'yicha tuzdim", "Kechqurun reja bilan haqiqatni solishtirdim", "Eng katta farqning sababini yozdim"],
+      ["Reja nega buzildi yoki nega ishladi?", "Ertangi rejaga qancha zaxira vaqt qo'shaman?"]],
+    ["1-hafta xulosasi", "Hafta oxirida to'xtab, orqaga qarash kelasi haftani yengillashtiradi. Yozuvlaringizni qayta o'qing.",
+      ["Haftalik yozuvlarni qayta o'qidim", "Eng foydali odatimni belgiladim", "Keyingi hafta uchun bitta maqsad qo'ydim"],
+      ["Bu haftadan eng katta saboq nima?", "Qaysi odat qolishi, qaysi biri ketishi kerak?"]],
+
+    ["Muhim va shoshilinch", "Shoshilinch ish har doim ham muhim emas. Ishlarni to'rt guruhga ajrating va muhimiga ko'proq vaqt bering.",
+      ["Ishlarni to'rt guruhga ajratdim", "Muhim, lekin shoshilinch bo'lmagan bitta ishni boshladim", "Keraksiz bitta ishni ro'yxatdan o'chirdim"],
+      ["Qaysi ish shoshilinch ko'rinib, aslida muhim emas edi?", "Muhim ishlarga qancha vaqt ajratdim?"]],
+    ["Uchta ustuvor ish", "Hamma narsa ustuvor bo'lsa, hech narsa ustuvor emas. Kunni uchta asosiy ish atrofida quring.",
+      ["Kechadan uchta ustuvor ishni belgilab qo'ygan edim", "Birinchisini kunning boshida boshladim", "Uchalasini ham yakunladim"],
+      ["Qaysi ustuvor ish eng qiyin bo'ldi va nega?", "Ertangi uchta ishim qaysilar?"]],
+    ["«Yo'q» deyish", "Har bir «ha» boshqa narsaga «yo'q» degani. Vaqtingizni olgan so'rovlarni ongli tanlang.",
+      ["Bitta taklifga ochiq «yo'q» dedim", "Rozi bo'lishdan oldin bir daqiqa o'yladim", "Vaqtimni eng ko'p oladigan so'rovni yozib qo'ydim"],
+      ["«Yo'q» deyish nega qiyin?", "«Yo'q» deb nimani saqlab qoldim?"]],
+    ["Chuqur ish", "Eng qimmatli natijalar to'xtovsiz ishlagan soatlarda tug'iladi. Bugun shunday bir oyna oching.",
+      ["90 daqiqa to'xtovsiz ishladim", "Telefon boshqa xonada edi", "Natijani yozib qo'ydim"],
+      ["Chuqur ishda nima tez bitdi?", "Menga qaysi vaqt oralig'i eng mos?"]],
+    ["Bir vaqtda bitta ish", "Ko'p ishni birga qilish tezlik emas, tarqoqlik beradi. Bitta ishni oxirigacha yetkazing.",
+      ["Bir ishni tugatmay boshqasiga o'tmadim", "Tarqoqlikka tushgan paytlarimni sanadim", "Bitta ishni to'liq yakunladim"],
+      ["Qachon bir necha ishni aralashtirib yubordim?", "Bitta ishga e'tibor berganimda nima o'zgardi?"]],
+    ["Dam olish ham ishning bir qismi", "Charchagan miya sekin ishlaydi. Tanaffus rejaga kiritilsa, kun oxirida ko'proq quvvat qoladi.",
+      ["Ish orasida 3 ta qisqa tanaffus qildim", "Tushlikni ish stolida o'tirmasdan o'tkazdim", "Kechqurun 30 daqiqa ekransiz o'tkazdim"],
+      ["Qachon eng ko'p charchadim?", "Qanday dam olish menga quvvat berdi?"]],
+    ["2-hafta xulosasi", "Ustuvorlik va diqqat haftasi tugadi. Nima ishlaganini ko'rib, yaxshisini qoldiring.",
+      ["Haftalik yozuvlarni qayta o'qidim", "Eng yaxshi ishlagan usulimni belgiladim", "Keyingi hafta uchun bitta maqsad qo'ydim"],
+      ["Bu hafta ustuvorlarni tanlashda nimani o'rgandim?", "Qaysi usul menga eng yaxshi ishladi?"]],
+
+    ["Kichik odat kuchi", "Katta o'zgarish kichik odatdan boshlanadi. Shunday kichik odat tanlangki, uni bajarmaslik qiyin bo'lsin.",
+      ["2 daqiqadan oshmaydigan bitta odat tanladim", "Uni bugun bajardim", "Bajarilganini belgilab qo'ydim"],
+      ["Tanlagan odatim qaysi va nega aynan shu?", "Uni yanada osonlashtirish mumkinmi?"]],
+    ["Odatni bog'lash", "Yangi odat eskisiga ulansa, esda qolishi osonlashadi. «Shundan keyin shuni qilaman» qoidasi yordam beradi.",
+      ["«X dan keyin Y qilaman» qoidasini yozdim", "Uni bugun sinab ko'rdim", "Qoidani ko'zga tushadigan joyga qo'ydim"],
+      ["Qaysi odatim yangisiga tayanch bo'ldi?", "Bog'lash qayerda ishlamadi?"]],
+    ["Muhit odatni belgilaydi", "Iroda kuchsiz bo'lgan kunda muhit yordam beradi. Kerakli narsani yaqinroq, halaqit beradiganni uzoqroq qo'ying.",
+      ["Stolimdan bitta chalg'ituvchini olib tashladim", "Foydali narsani qo'l ostiga qo'ydim", "Ish joyimni 10 daqiqa tartibga keltirdim"],
+      ["Muhitim qaysi odatimga to'sqinlik qiladi?", "Ertaga muhitda nimani o'zgartiraman?"]],
+    ["Mukofot va belgilash", "Bajarilgan odatni ko'rish rag'bat beradi. Kichik mukofot va belgi zanjirni davom ettiradi.",
+      ["Odat uchun kichik mukofot belgiladim", "Bajarilgan kunni belgilab bordim", "Zanjir uzilmasligi uchun reja yozdim"],
+      ["Qaysi mukofot meni rag'batlantirdi?", "Zanjirni nima uzishi mumkin?"]],
+    ["Qoqilganda", "Bir kunni o'tkazib yuborish xato emas, to'xtab qolish xato. Qaytish yo'lini oldindan o'ylab qo'ying.",
+      ["Odatni o'tkazib yuborgan bo'lsam, sababini yozdim", "Ketma-ket ikki kun o'tkazmaslik qoidasiga amal qildim", "Qaytish uchun kichik qadam tashladim"],
+      ["Nega to'xtadim yoki nega davom ettim?", "Keyingi safar qoqilsam, nima qilaman?"]],
+    ["Uyqu va energiya", "Energiya uyqudan boshlanadi. Bir xil vaqtda yotish va ekranni erta o'chirish ertangi kunni o'zgartiradi.",
+      ["Bir xil vaqtda yotdim", "Yotishdan 30 daqiqa oldin ekranni o'chirdim", "Ertalab energiyamni 1 dan 10 gacha baholadim"],
+      ["Uyqu sifati kunimga qanday ta'sir qildi?", "Ertaga uyquni yaxshilash uchun nima qilaman?"]],
+    ["3-hafta xulosasi", "Odatlar haftasi yakunlandi. Qaysi odat o'rnashayotganini ko'ring va unga e'tibor qarating.",
+      ["Haftalik yozuvlarni qayta o'qidim", "O'rnashayotgan odatni belgiladim", "Keyingi hafta uchun bitta maqsad qo'ydim"],
+      ["Qaysi odatim mustahkamlanyapti?", "Qaysi odatga hali ko'proq e'tibor kerak?"]],
+
+    ["O'zini kuzatish", "O'zingizni kuzatish o'zgarishning boshlanishi. Kayfiyat va energiya qachon o'zgarishini payqang.",
+      ["Kun davomida 3 marta kayfiyatimni yozdim", "Kayfiyat o'zgargan lahzani belgiladim", "O'zgarish sababini topishga urindim"],
+      ["Kayfiyatim qachon eng yaxshi edi?", "Nima kayfiyatimni tushirdi?"]],
+    ["Xatodan saboq", "Xato yo'qotish emas, ma'lumot. Uni yozib qo'ysangiz, takrorlash ehtimoli kamayadi.",
+      ["Shu oydagi bitta xatoni yozdim", "Undan xulosa chiqardim", "Takrorlamaslik uchun qoida yozdim"],
+      ["Qaysi xatom menga eng ko'p o'rgatdi?", "Qoidam ishlaydimi?"]],
+    ["Minnatdorchilik", "Minnatdorlikni ovoz chiqarib aytish ham sizni, ham boshqani quvvatlantiradi.",
+      ["Bir kishiga minnatdorchilik bildirdim", "Bugungi uchta yaxshi narsani yozdim", "Bir kishiga yaxshi so'z aytdim"],
+      ["Kimga minnatdorman va nega?", "Bu menga qanday his berdi?"]],
+    ["Fikr so'rash", "O'zingizni tashqaridan ko'rish qiyin. Ishonchli odamning fikri ko'r joyingizni ko'rsatadi.",
+      ["Ishonchli odamdan fikr so'radim", "Javobni gapni bo'lmay tingladim", "Bitta tavsiyani amalda sinadim"],
+      ["Menga qanday fikr aytildi?", "Qaysi tavsiya ustida ishlayman?"]],
+    ["Resurslarim", "Maqsadga vaqt, bilim va pul kerak. Qaysi biri yetishmasligini oldindan bilish yo'lni qisqartiradi.",
+      ["Maqsad uchun kerakli vaqtni hisobladim", "Yetishmayotgan narsani aniqladim", "To'ldirish uchun reja yozdim"],
+      ["Maqsadimga eng ko'p nima yetishmaydi?", "Buni qanday to'ldiraman?"]],
+    ["Maqsadni qayta ko'rish", "Oy oxirida birinchi kundagi qadriyat va maqsadlarga qayting. Ular hali ham siz uchun muhimmi?",
+      ["1-kundagi qadriyatlarimni qayta o'qidim", "Maqsadlarim ularga mosligini tekshirdim", "Kerak bo'lsa maqsadni yangiladim"],
+      ["Qadriyatlarim o'zgardimi?", "Qaysi maqsadim endi mos emas?"]],
+    ["4-hafta xulosasi", "Mustahkamlash haftasi tugadi. O'zingizdagi o'zgarishlarni sanab chiqing.",
+      ["Haftalik yozuvlarni qayta o'qidim", "O'zimdagi eng katta o'zgarishni belgiladim", "Yakuniy kunlar uchun reja tuzdim"],
+      ["O'zimda qanday o'zgarish sezyapman?", "Qaysi odat men bilan qoladi?"]],
+    ["Keyingi 90 kun", "30 kun boshlanish xolos. Kelasi 90 kunga aniq maqsad va birinchi qadam qo'ying.",
+      ["3 ta aniq maqsad yozdim", "Har biriga birinchi qadam belgiladim", "Birinchi qadamni kalendarga qo'ydim"],
+      ["Keyingi 90 kunda nimaga erishmoqchiman?", "Birinchi qadamim nima va qachon?"]],
+    ["O'zimga xat", "Oxirgi kunda o'zingizga xat yozing. Uni bir oydan keyin o'qiysiz.",
+      ["30 kunlik yozuvlarni qayta o'qidim", "Davom ettiradigan 3 odatni tanladim", "O'zimga xat yozdim"],
+      ["30 kun menga nimani berdi?", "Kelajakdagi o'zimga nima deyman?"]]
+  ];
+  var WEEKS = ["Vaqt va uyg'onish", "Ustuvorlik va diqqat", "Odat va intizom", "Mustahkamlash va keyingi qadam"];
+  var HOURS = ["06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"];
+  var MONTHS = ["yanvar", "fevral", "mart", "aprel", "may", "iyun", "iyul", "avgust", "sentabr", "oktabr", "noyabr", "dekabr"];
+  var WD = ["yakshanba", "dushanba", "seshanba", "chorshanba", "payshanba", "juma", "shanba"];
+  var SKINS = [
+    { id: "auto", name: "Avto", a: "#A51C30", d: "#E4E7EC" },
+    { id: "rose", name: "Atirgul", a: "#B33055", d: "#EBD3D9" },
+    { id: "forest", name: "O'rmon", a: "#2E6B49", d: "#D3DCD2" },
+    { id: "sea", name: "Dengiz", a: "#1E6C93", d: "#CDDCE5" },
+    { id: "night", name: "Tun", a: "#C93A50", d: "#0D0F14" }
+  ];
+  var KEY = "kundalik30.v1";
+  var DEF = { skin: "auto", font: "hand", paper: "lined", fs: 17 };
+  var state = { start: null, days: {}, prefs: {} };
+  var mem = null;
+  var root = document.documentElement;
+
+  function load() {
+    try { var s = localStorage.getItem(KEY); if (s) { state = JSON.parse(s); return; } } catch (e) {}
+    if (mem) state = mem;
+  }
+  function save() {
+    mem = state;
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+    var el = document.getElementById("saved");
+    if (el) el.textContent = "Saqlandi";
+  }
+  function iso(d) { var m = d.getMonth() + 1, k = d.getDate(); return d.getFullYear() + "-" + (m < 10 ? "0" : "") + m + "-" + (k < 10 ? "0" : "") + k; }
+  function pad2(n) { return (n < 10 ? "0" : "") + n; }
+  function todayNum() {
+    var a = new Date(state.start + "T00:00:00"), b = new Date(iso(new Date()) + "T00:00:00");
+    return Math.round((b - a) / 86400000) + 1;
+  }
+  function dlabel(n) {
+    var d = new Date(state.start + "T00:00:00"); d.setDate(d.getDate() + n - 1);
+    return d.getDate() + "-" + MONTHS[d.getMonth()] + ", " + WD[d.getDay()];
+  }
+  function weekOf(n) { return n <= 7 ? 0 : n <= 14 ? 1 : n <= 21 ? 2 : 3; }
+  function day(n) {
+    var d = state.days[n];
+    if (!d) d = state.days[n] = {};
+    if (!d.tasks) d.tasks = [{ t: "", d: false }, { t: "", d: false }, { t: "", d: false }];
+    if (!d.checks) d.checks = [false, false, false];
+    if (!d.plan) d.plan = ["", "", "", "", "", "", "", "", ""];
+    ["wake", "sleep", "q1", "q2", "learn", "grat", "step"].forEach(function (k) { if (d[k] === undefined) d[k] = ""; });
+    if (d.score === undefined) d.score = 0;
+    if (d.done === undefined) d.done = false;
+    return d;
+  }
+  function prefs() {
+    if (!state.prefs) state.prefs = {};
+    for (var k in DEF) if (state.prefs[k] === undefined) state.prefs[k] = DEF[k];
+    return state.prefs;
+  }
+
+  load();
+  if (!state.start) state.start = iso(new Date());
+  var sel = Math.min(30, Math.max(1, todayNum()));
+
+  var grid = document.getElementById("grid");
+  var sheets = document.getElementById("sheets");
+  var settings = document.getElementById("settings");
+  var gear = document.getElementById("gear");
+
+  function tgSync() {
+    try {
+      var w = window.Telegram && Telegram.WebApp;
+      if (!w) return;
+      var m = getComputedStyle(document.body).backgroundColor.match(/\d+/g);
+      if (m) {
+        var hex = "#" + m.slice(0, 3).map(function (x) { return ("0" + (+x).toString(16)).slice(-2); }).join("");
+        if (w.setHeaderColor) w.setHeaderColor(hex);
+        if (w.setBackgroundColor) w.setBackgroundColor(hex);
+      }
+    } catch (e) {}
+  }
+
+  function fit(t) {
+    var min = (+t.dataset.lines || 2) * 32;
+    t.style.height = "auto";
+    t.style.height = Math.max(min, Math.ceil(t.scrollHeight / 32) * 32) + "px";
+  }
+  function fitAll() { Array.prototype.forEach.call(sheets.querySelectorAll("textarea.write"), fit); }
+
+  function applyPrefs() {
+    var p = prefs();
+    root.setAttribute("data-skin", p.skin);
+    root.setAttribute("data-font", p.font);
+    root.setAttribute("data-paper", p.paper);
+    root.style.setProperty("--fs", String(p.fs));
+    Array.prototype.forEach.call(document.querySelectorAll("#skins .swatch"), function (b) { b.setAttribute("aria-pressed", String(b.dataset.skin === p.skin)); });
+    Array.prototype.forEach.call(document.querySelectorAll("#fonts .opt"), function (b) { b.setAttribute("aria-pressed", String(b.dataset.font === p.font)); });
+    Array.prototype.forEach.call(document.querySelectorAll("#papers .opt"), function (b) { b.setAttribute("aria-pressed", String(b.dataset.paper === p.paper)); });
+    document.getElementById("fs").value = p.fs;
+    fitAll();
+    tgSync();
+  }
+
+  function buildSettings() {
+    var box = document.getElementById("skins");
+    SKINS.forEach(function (s) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "swatch"; b.dataset.skin = s.id;
+      b.innerHTML = '<span class="dot"></span><span>' + s.name + '</span>';
+      b.firstChild.style.background = "linear-gradient(135deg," + s.d + " 50%," + s.a + " 50%)";
+      box.appendChild(b);
+    });
+  }
+
+  function renderGrid() {
+    var tn = todayNum();
+    grid.innerHTML = "";
+    for (var i = 1; i <= 30; i++) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "cell" + (state.days[i] && state.days[i].done ? " done" : "") + (i === tn ? " today" : "") + (i === sel ? " sel" : "") + (i > tn ? " future" : "");
+      b.textContent = i;
+      b.setAttribute("aria-label", i + "-kun" + (state.days[i] && state.days[i].done ? ", yakunlangan" : "") + (i === tn ? ", bugun" : ""));
+      b.dataset.n = i;
+      grid.appendChild(b);
+    }
+  }
+
+  function renderStats() {
+    var done = 0, streak = 0, sum = 0, cnt = 0, i;
+    for (i = 1; i <= 30; i++) {
+      var d = state.days[i];
+      if (d && d.done) done++;
+      if (d && d.score) { sum += d.score; cnt++; }
+    }
+    var tn = Math.min(30, Math.max(1, todayNum()));
+    var from = (state.days[tn] && state.days[tn].done) ? tn : tn - 1;
+    for (i = from; i >= 1; i--) { if (state.days[i] && state.days[i].done) streak++; else break; }
+    document.getElementById("sDone").textContent = done + "/30";
+    document.getElementById("sStreak").textContent = streak;
+    document.getElementById("sScore").textContent = cnt ? (sum / cnt).toFixed(1) : "–";
+  }
+
+  function renderSheets() {
+    var d = day(sel), p = PLAN[sel - 1], wk = weekOf(sel), i, h = "";
+    var wnum = (wk + 1) + "-hafta";
+
+    /* Ertalabki sahifa */
+    h += '<article class="sheet"><div class="band"><span>Harvard metodi</span><span>' + wnum + ' · Kun ' + pad2(sel) + '/30</span></div><div class="pad">';
+    h += '<div class="head"><span class="num">' + pad2(sel) + '</span><div><span class="eyebrow">' + sel + '-kun · ' + WEEKS[wk] + '</span><h2>' + p[0] + '</h2></div></div>';
+    h += '<div class="dateline">Sana: ' + dlabel(sel) + '</div>';
+    h += '<p class="idea"><b>G\'OYA</b>' + p[1] + '</p>';
+    h += '<div class="field"><span class="lbl">Bugungi vazifalar</span><div class="checks">';
+    for (i = 0; i < 3; i++) h += '<label class="check' + (d.checks[i] ? ' on' : '') + '"><input type="checkbox" data-chk="' + i + '"' + (d.checks[i] ? ' checked' : '') + '><span>' + p[2][i] + '</span></label>';
+    h += '</div></div>';
+    h += '<div class="times"><div class="field"><label for="wake">Uyg\'ondim</label><input type="time" id="wake" data-w="wake"></div><div class="field"><label for="sleep">Uxladim</label><input type="time" id="sleep" data-w="sleep"></div></div>';
+    h += '<div class="field"><span class="lbl">Eng muhim 3 ishim</span><div class="tasks">';
+    for (i = 0; i < 3; i++) h += '<div class="task' + (d.tasks[i].d ? ' on' : '') + '"><input type="checkbox" data-c="' + i + '" aria-label="' + (i + 1) + '-ish bajarildi"' + (d.tasks[i].d ? ' checked' : '') + '><input type="text" class="li" id="t' + i + '" data-t="' + i + '" placeholder="' + (i + 1) + '" aria-label="' + (i + 1) + '-ustuvor ish"></div>';
+    h += '</div></div>';
+    h += '<div class="field"><span class="lbl">Kun rejasi</span><div class="slots">';
+    for (i = 0; i < HOURS.length; i++) h += '<div class="slot"><span>' + HOURS[i] + '</span><input type="text" class="li" id="p' + i + '" data-p="' + i + '" aria-label="' + HOURS[i] + ' rejasi"></div>';
+    h += '</div></div>';
+    h += '</div></article>';
+
+    /* Kechki sarhisob */
+    h += '<article class="sheet"><div class="band"><span>Kechki sarhisob</span><span>Kun ' + pad2(sel) + '/30</span></div><div class="pad">';
+    h += '<h2>Kechki sarhisob</h2>';
+    h += '<div class="stamp" id="stamp"' + (d.done ? '' : ' hidden') + '>Yakunlandi</div>';
+    h += '<div class="field"><label class="q" for="q1">' + p[3][0] + '</label><textarea class="write" id="q1" data-k="q1" data-lines="4"></textarea></div>';
+    h += '<div class="field"><label class="q" for="q2">' + p[3][1] + '</label><textarea class="write" id="q2" data-k="q2" data-lines="4"></textarea></div>';
+    h += '<div class="field"><label for="learn">Bugun nimani o\'rgandim</label><textarea class="write" id="learn" data-k="learn" data-lines="2"></textarea></div>';
+    h += '<div class="field"><label for="grat">Nimadan minnatdorman</label><textarea class="write" id="grat" data-k="grat" data-lines="2"></textarea></div>';
+    h += '<div class="field"><span class="lbl">Kunga bahoyim</span><div class="score">';
+    for (var s = 1; s <= 10; s++) h += '<button type="button" data-s="' + s + '" aria-pressed="' + (d.score === s) + '" aria-label="Baho ' + s + '">' + s + '</button>';
+    h += '</div></div>';
+    h += '<div class="field"><label for="step">Ertangi kun uchun 1 qadam</label><textarea class="write" id="step" data-k="step" data-lines="2"></textarea></div>';
+    h += '<div class="row"><span class="saved" id="saved"></span><button type="button" class="btn" id="doneBtn" aria-pressed="' + d.done + '">' + (d.done ? 'Kun yopildi' : 'Kunni yopish') + '</button></div>';
+    h += '<p class="motto">Bugungi yozuv ertangi qadamingizni aniq qiladi.</p>';
+    h += '</div></article>';
+
+    sheets.innerHTML = h;
+    ["q1", "q2", "learn", "grat", "step"].forEach(function (k) { sheets.querySelector("#" + k).value = d[k] || ""; });
+    sheets.querySelector("#wake").value = d.wake || "";
+    sheets.querySelector("#sleep").value = d.sleep || "";
+    for (i = 0; i < 3; i++) sheets.querySelector("#t" + i).value = d.tasks[i].t || "";
+    for (i = 0; i < HOURS.length; i++) sheets.querySelector("#p" + i).value = d.plan[i] || "";
+    fitAll();
+  }
+
+  function renderAll() { renderGrid(); renderStats(); renderSheets(); }
+
+  grid.addEventListener("click", function (ev) {
+    var b = ev.target.closest(".cell");
+    if (!b) return;
+    sel = +b.dataset.n;
+    renderGrid(); renderSheets();
+    sheets.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  sheets.addEventListener("input", function (ev) {
+    var t = ev.target, d = day(sel);
+    if (t.dataset.k) { d[t.dataset.k] = t.value; fit(t); }
+    else if (t.dataset.t !== undefined) d.tasks[+t.dataset.t].t = t.value;
+    else if (t.dataset.p !== undefined) d.plan[+t.dataset.p] = t.value;
+    else if (t.dataset.w) d[t.dataset.w] = t.value;
+    else return;
+    save();
+  });
+  sheets.addEventListener("change", function (ev) {
+    var t = ev.target, d = day(sel);
+    if (t.dataset.c !== undefined) {
+      d.tasks[+t.dataset.c].d = t.checked;
+      t.closest(".task").classList.toggle("on", t.checked);
+      save();
+    } else if (t.dataset.chk !== undefined) {
+      d.checks[+t.dataset.chk] = t.checked;
+      t.closest(".check").classList.toggle("on", t.checked);
+      save();
+    } else if (t.dataset.w) {
+      d[t.dataset.w] = t.value; save();
+    }
+  });
+  sheets.addEventListener("click", function (ev) {
+    var d = day(sel), b = ev.target.closest("button");
+    if (!b) return;
+    if (b.dataset.s) {
+      var v = +b.dataset.s;
+      d.score = d.score === v ? 0 : v;
+      Array.prototype.forEach.call(sheets.querySelectorAll(".score button"), function (x) { x.setAttribute("aria-pressed", String(+x.dataset.s === d.score)); });
+      save(); renderStats();
+    } else if (b.id === "doneBtn") {
+      d.done = !d.done;
+      b.setAttribute("aria-pressed", String(d.done));
+      b.textContent = d.done ? "Kun yopildi" : "Kunni yopish";
+      document.getElementById("stamp").hidden = !d.done;
+      save(); renderGrid(); renderStats();
+    }
+  });
+
+  gear.addEventListener("click", function () {
+    var open = settings.hidden;
+    settings.hidden = !open;
+    gear.setAttribute("aria-expanded", String(open));
+    if (open) settings.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+  settings.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button");
+    if (!b) return;
+    var p = prefs();
+    if (b.dataset.skin) p.skin = b.dataset.skin;
+    else if (b.dataset.font) p.font = b.dataset.font;
+    else if (b.dataset.paper) p.paper = b.dataset.paper;
+    else return;
+    save(); applyPrefs();
+  });
+  document.getElementById("fs").addEventListener("input", function (ev) {
+    prefs().fs = +ev.target.value; save(); applyPrefs();
+  });
+  var sd = document.getElementById("startDate");
+  sd.value = state.start;
+  sd.addEventListener("change", function () {
+    if (!sd.value) return;
+    state.start = sd.value; save();
+    sel = Math.min(30, Math.max(1, todayNum()));
+    renderAll();
+  });
+
+  var now = new Date();
+  document.getElementById("todayStamp").textContent = "Bugun: " + now.getDate() + "-" + MONTHS[now.getMonth()] + ", " + WD[now.getDay()];
+
+  buildSettings();
+  renderAll();
+  applyPrefs();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+  try { if (window.Telegram && Telegram.WebApp) { Telegram.WebApp.ready(); Telegram.WebApp.expand(); tgSync(); } } catch (e) {}
+})();
+</script>
+</html>
